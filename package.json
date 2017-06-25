@@ -1,0 +1,23 @@
+{
+  "name": "rest-browser",
+  "version": "0.0.1",
+  "description": "REST Driver for Browser",
+  "main": "./js/index.js",
+  "typings": "./js/index.d.ts",
+  "scripts": {},
+  "author": "Wen Chang",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wchang28/rest-browser.git"
+  },
+  "dependencies": {
+    "@types/jquery": "^2.0.43",
+    "@types/node": "^7.0.31",
+    "es6-promise": "^4.1.0",
+    "eventsource-typings": "git+https://github.com/wchang28/eventsource-typings.git",
+    "jquery": "^3.2.1",
+    "rest-api-interfaces": "git+https://github.com/wchang28/rest-api-interfaces.git",
+    "rest-driver": "git+https://github.com/wchang28/rest-driver.git"
+  }
+}
