@@ -94,7 +94,7 @@ export function get() : $dr.$Driver {
         });
     };
     // returns query string with ? in the front
-    let searchString = (qs: any) : string => (qs ? "?" + (typeof qs === "string" ? qs : $.param(qs)) : "");
+    let searchString = (qs: any) : string => (qs && JSON.stringify(qs) != "{}" ? "?" + (typeof qs === "string" ? qs : $.param(qs)) : "");
 
     let driver:$dr.$Driver  = {
         $J: (method:string, url:string, data:any, options?: ApiCallOptions) : Promise<RESTReturn> => {
