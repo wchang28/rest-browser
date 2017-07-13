@@ -105,7 +105,7 @@ function get() {
             return new Promise(function (resolve, reject) {
                 var initMsgs = [];
                 var EventSource = global['EventSource'];
-                var es = new EventSource(url, options);
+                var es = new EventSource(url);
                 // It is possible that onmessage() is called BEFORE onopen() when some kind of EventSource polyfill
                 // is used in browsers that don't support EventSource natively (IE for example). In this case, we must
                 // cache all the messages recieved before the onopen() event

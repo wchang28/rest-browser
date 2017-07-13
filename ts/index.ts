@@ -117,7 +117,7 @@ export function get() : $dr.$Driver {
             return new Promise<$dr.I$EReturn>((resolve: (value: $dr.I$EReturn) => void, reject:(err: any) => void) => {
                 let initMsgs: eventSource.Message[] = [];
                 let EventSource: eventSource.EventSourceConstructor = global['EventSource'];
-                let es: eventSource.IEventSource = new EventSource(url, options);
+                let es: eventSource.IEventSource = new EventSource(url);
                 // It is possible that onmessage() is called BEFORE onopen() when some kind of EventSource polyfill
                 // is used in browsers that don't support EventSource natively (IE for example). In this case, we must
                 // cache all the messages recieved before the onopen() event
