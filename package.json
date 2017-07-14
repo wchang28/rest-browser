@@ -1,6 +1,6 @@
 {
   "name": "rest-browser",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "REST Driver for Browser",
   "main": "./js/index.js",
   "typings": "./js/index.d.ts",

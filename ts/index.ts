@@ -126,12 +126,9 @@ export function get() : $dr.$Driver {
                 };
                 es.onopen = () => {
                     let ret: $dr.I$EReturn = {eventSrc: es};
-                    // wait for 300 ms for the initial msgs to arrive
-                    setTimeout(() => {
-                        if (initMsgs.length > 0) ret.initMsgs = initMsgs;
-                        es.onmessage = null;
-                        resolve(ret);
-                    }, 300);
+                    if (initMsgs.length > 0) ret.initMsgs = initMsgs;
+                    es.onmessage = null;
+                    resolve(ret);
                 }
                 es.onerror = (err: eventSource.Error) => {
                     es.close();
