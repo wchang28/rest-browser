@@ -113,11 +113,7 @@ function get() {
                     initMsgs.push(message);
                 };
                 es.onopen = function () {
-                    var ret = { eventSrc: es };
-                    if (initMsgs.length > 0)
-                        ret.initMsgs = initMsgs;
-                    es.onmessage = null;
-                    resolve(ret);
+                    resolve({ eventSrc: es, initMsgs: initMsgs });
                 };
                 es.onerror = function (err) {
                     es.close();
