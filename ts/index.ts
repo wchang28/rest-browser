@@ -177,14 +177,14 @@ export function get() : $dr.$Driver {
                 xhr.send();
             });
         }
-        ,$U: (method: HTTPMethod, url:string, contentInfo: ContentInfo, blob: Blob, options?: ApiCallOptions) : Promise<RESTReturn> => {
-            return getBlobArrayBuffer(blob).then((arrayBuffer: any) => {
+        ,$U: (method: HTTPMethod, url:string, readableContent: $dr.ReadableContent<Blob>, options?: ApiCallOptions) : Promise<RESTReturn> => {
+            return getBlobArrayBuffer(readableContent.readable).then((arrayBuffer: any) => {
                 let settings: JQueryAjaxSettings = {
                     url
                     ,method
                     ,data: arrayBuffer
                     ,processData: false
-                    ,contentType: contentInfo.type
+                    ,contentType: readableContent.info.size
                 };
                 if (options && options.headers) settings.headers = options.headers;
                 return jQueryAjax(settings);

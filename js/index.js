@@ -168,14 +168,14 @@ function get() {
                 xhr.send();
             });
         },
-        $U: function (method, url, contentInfo, blob, options) {
-            return getBlobArrayBuffer(blob).then(function (arrayBuffer) {
+        $U: function (method, url, readableContent, options) {
+            return getBlobArrayBuffer(readableContent.readable).then(function (arrayBuffer) {
                 var settings = {
                     url: url,
                     method: method,
                     data: arrayBuffer,
                     processData: false,
-                    contentType: contentInfo.type
+                    contentType: readableContent.info.size
                 };
                 if (options && options.headers)
                     settings.headers = options.headers;
