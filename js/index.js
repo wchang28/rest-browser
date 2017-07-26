@@ -19,7 +19,9 @@ function jAjax(settings) {
         });
     });
 }
-function parseResponseHeaders(headerStr) {
+// based on code @ https://gist.github.com/mmazer/5404301
+function parseResponseHeaders(headerStr, lowerCaseKey) {
+    if (lowerCaseKey === void 0) { lowerCaseKey = true; }
     var headers = {};
     if (!headerStr) {
         return headers;
@@ -32,6 +34,8 @@ function parseResponseHeaders(headerStr) {
         var index = headerPair.indexOf('\u003a\u0020');
         if (index > 0) {
             var key = headerPair.substring(0, index);
+            if (lowerCaseKey)
+                key = key.toLowerCase();
             var val = headerPair.substring(index + 2);
             headers[key] = val;
         }

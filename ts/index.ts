@@ -31,7 +31,8 @@ function jAjax(settings: JQueryAjaxSettings) : Promise<jQueryRESTReturn> {
     });
 }
 
-function parseResponseHeaders(headerStr:string) : HTTPHeaders {
+// based on code @ https://gist.github.com/mmazer/5404301
+function parseResponseHeaders(headerStr:string, lowerCaseKey: boolean = true) : HTTPHeaders {
     let headers: HTTPHeaders = {};
     if (!headerStr) {
         return headers;
@@ -44,6 +45,7 @@ function parseResponseHeaders(headerStr:string) : HTTPHeaders {
         let index = headerPair.indexOf('\u003a\u0020');
         if (index > 0) {
             let key = headerPair.substring(0, index);
+            if (lowerCaseKey) key = key.toLowerCase();
             let val = headerPair.substring(index + 2);
             headers[key] = val;
         }
