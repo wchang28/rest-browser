@@ -71,19 +71,6 @@ function jQueryRESTReturn2IError(ret: jQueryRESTReturn) : IError {
         return {error: statusText||jqError||'unknown-error', error_description: responseText||jqError||statusText||'unknown error occured'};
 }
 
-function getBlobArrayBuffer(blob: Blob) : Promise<any> {
-    return new Promise<any>((resolve: (result: any) => void, reject: (err: any) => void) => {
-        let reader = new FileReader();
-        reader.onloadend = (ev: ProgressEvent) => {
-            resolve(reader.result);
-        }
-        reader.onerror = (ev: ErrorEvent) => {
-            reject(reader.error);
-        }
-        reader.readAsArrayBuffer(blob);
-    });
-}
-
 export function get() : $dr.$Driver {
     // jQuery Ajax call that throws IError on fail
     let jQueryAjax = (settings:JQueryAjaxSettings) : Promise<RESTReturn> => {
@@ -179,21 +166,6 @@ export function get() : $dr.$Driver {
                 xhr.send();
             });
         }
-        /*
-        ,$U: (method: HTTPMethod, url:string, readableContent: $dr.ReadableContent<Blob>, options?: ApiCallOptions) : Promise<RESTReturn> => {
-            return getBlobArrayBuffer(readableContent.readable).then((arrayBuffer: any) => {
-                let settings: JQueryAjaxSettings = {
-                    url
-                    ,method
-                    ,data: arrayBuffer
-                    ,processData: false
-                    ,contentType: readableContent.info.type
-                };
-                if (options && options.headers) settings.headers = options.headers;
-                return jQueryAjax(settings);
-            });
-        }
-        */
         ,$U: (method: HTTPMethod, url:string, readableContent: $dr.ReadableContent<Blob>, options?: ApiCallOptions) : Promise<RESTReturn> => {
             let settings: JQueryAjaxSettings = {
                 url

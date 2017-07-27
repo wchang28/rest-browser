@@ -61,18 +61,6 @@ function jQueryRESTReturn2IError(ret) {
     else
         return { error: statusText || jqError || 'unknown-error', error_description: responseText || jqError || statusText || 'unknown error occured' };
 }
-function getBlobArrayBuffer(blob) {
-    return new Promise(function (resolve, reject) {
-        var reader = new FileReader();
-        reader.onloadend = function (ev) {
-            resolve(reader.result);
-        };
-        reader.onerror = function (ev) {
-            reject(reader.error);
-        };
-        reader.readAsArrayBuffer(blob);
-    });
-}
 function get() {
     // jQuery Ajax call that throws IError on fail
     var jQueryAjax = function (settings) {
@@ -171,23 +159,7 @@ function get() {
                 xhr.responseType = 'blob';
                 xhr.send();
             });
-        }
-        /*
-        ,$U: (method: HTTPMethod, url:string, readableContent: $dr.ReadableContent<Blob>, options?: ApiCallOptions) : Promise<RESTReturn> => {
-            return getBlobArrayBuffer(readableContent.readable).then((arrayBuffer: any) => {
-                let settings: JQueryAjaxSettings = {
-                    url
-                    ,method
-                    ,data: arrayBuffer
-                    ,processData: false
-                    ,contentType: readableContent.info.type
-                };
-                if (options && options.headers) settings.headers = options.headers;
-                return jQueryAjax(settings);
-            });
-        }
-        */
-        ,
+        },
         $U: function (method, url, readableContent, options) {
             var settings = {
                 url: url,
