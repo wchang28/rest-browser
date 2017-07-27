@@ -171,20 +171,34 @@ function get() {
                 xhr.responseType = 'blob';
                 xhr.send();
             });
-        },
-        $U: function (method, url, readableContent, options) {
-            return getBlobArrayBuffer(readableContent.readable).then(function (arrayBuffer) {
-                var settings = {
-                    url: url,
-                    method: method,
-                    data: arrayBuffer,
-                    processData: false,
-                    contentType: readableContent.info.size
+        }
+        /*
+        ,$U: (method: HTTPMethod, url:string, readableContent: $dr.ReadableContent<Blob>, options?: ApiCallOptions) : Promise<RESTReturn> => {
+            return getBlobArrayBuffer(readableContent.readable).then((arrayBuffer: any) => {
+                let settings: JQueryAjaxSettings = {
+                    url
+                    ,method
+                    ,data: arrayBuffer
+                    ,processData: false
+                    ,contentType: readableContent.info.type
                 };
-                if (options && options.headers)
-                    settings.headers = options.headers;
+                if (options && options.headers) settings.headers = options.headers;
                 return jQueryAjax(settings);
             });
+        }
+        */
+        ,
+        $U: function (method, url, readableContent, options) {
+            var settings = {
+                url: url,
+                method: method,
+                data: readableContent.readable,
+                processData: false,
+                contentType: readableContent.info.type
+            };
+            if (options && options.headers)
+                settings.headers = options.headers;
+            return jQueryAjax(settings);
         },
         createFormData: function () { return new FormData(); }
     };

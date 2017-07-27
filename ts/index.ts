@@ -179,6 +179,7 @@ export function get() : $dr.$Driver {
                 xhr.send();
             });
         }
+        /*
         ,$U: (method: HTTPMethod, url:string, readableContent: $dr.ReadableContent<Blob>, options?: ApiCallOptions) : Promise<RESTReturn> => {
             return getBlobArrayBuffer(readableContent.readable).then((arrayBuffer: any) => {
                 let settings: JQueryAjaxSettings = {
@@ -186,11 +187,23 @@ export function get() : $dr.$Driver {
                     ,method
                     ,data: arrayBuffer
                     ,processData: false
-                    ,contentType: readableContent.info.size
+                    ,contentType: readableContent.info.type
                 };
                 if (options && options.headers) settings.headers = options.headers;
                 return jQueryAjax(settings);
             });
+        }
+        */
+        ,$U: (method: HTTPMethod, url:string, readableContent: $dr.ReadableContent<Blob>, options?: ApiCallOptions) : Promise<RESTReturn> => {
+            let settings: JQueryAjaxSettings = {
+                url
+                ,method
+                ,data: readableContent.readable
+                ,processData: false
+                ,contentType: readableContent.info.type
+            };
+            if (options && options.headers) settings.headers = options.headers;
+            return jQueryAjax(settings);
         }
         ,createFormData: () : FormData => {return new FormData();}
     }
