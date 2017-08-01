@@ -160,7 +160,7 @@ function get() {
                 xhr.send();
             });
         },
-        $U: function (method, url, readableContent, options) {
+        $U: function (method, url, readableContent, progressCB, options) {
             var settings = {
                 url: url,
                 method: method,

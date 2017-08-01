@@ -166,7 +166,7 @@ export function get() : $dr.$Driver {
                 xhr.send();
             });
         }
-        ,$U: (method: HTTPMethod, url:string, readableContent: $dr.ReadableContent<Blob>, options?: ApiCallOptions) : Promise<RESTReturn> => {
+        ,$U: (method: HTTPMethod, url:string, readableContent: $dr.ReadableContent<Blob>, progressCB: $dr.ProgressCallback, options?: ApiCallOptions) : Promise<RESTReturn> => {
             let settings: JQueryAjaxSettings = {
                 url
                 ,method
